@@ -1,0 +1,10 @@
+.cells > img{
+  width: 100%;
+}
+.board-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 95%;
+}
