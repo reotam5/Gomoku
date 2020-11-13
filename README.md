@@ -1,7 +1,7 @@
 # Gomoku Hub
 
 This is my first big personal project!!
-This project demonstrate use of
+This project demonstrate the use of
 <ul>
 <li>HTML</li>
 <li>CSS</li>
