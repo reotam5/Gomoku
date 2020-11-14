@@ -31,6 +31,10 @@ class Board{
   }
 
   input(targetElement){
+    //don't allow users to enter on ai turn
+    if(this.game.currentP == this.game.AIID){
+      return;
+    }
     var unselectedCellType = "unselected";
     var currentP = this.game.currentP;
     var playerImg = this.game.listPlayers[currentP]["img"];
@@ -46,7 +50,7 @@ class Board{
       var y = parseInt(targetID.substring(division+1));
       var clickedIndex = x + (y * this.size);
 
-      var isWin = this.game.checkWin(this,this.getBoardStatus(),clickedIndex);
+      var isWin = this.game.checkWin(this,clickedIndex);
       if(isWin){
         this.game.exit();
         console.log(currentP+" won");

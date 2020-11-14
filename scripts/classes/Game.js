@@ -1,8 +1,9 @@
 class Game{
-  constructor(numPlayers,startinP){
+  constructor(numPlayers,startinP,aiID){
     this.numPlayers = numPlayers;
     this.listPlayers = this.setUpPlayers();
     this.currentP = startinP;
+    this.AIID = aiID;
   }
   setUpPlayers(){
     var numPlayers = this.numPlayers;
@@ -20,13 +21,17 @@ class Game{
     }else{
       this.currentP = 0;
     }
+    //AI turn
+    if(this.currentP == this.AIID){
+      AI.move(this.board,this.AIID);
+    }
   }
 
   //check every direction
-  checkWin(board,status,clickedIndex){
+  checkWin(board,clickedIndex){
     var targetP = board.checkWhoes(clickedIndex);
     for(var i = 0; i < 8; i++){
-      var count = this.checkDirection(board,status,clickedIndex,i,targetP,0);
+      var count = this.checkDirection(board,clickedIndex,i,targetP,0);
       if(count >= board.size){
         return true;
       }
@@ -35,11 +40,11 @@ class Game{
   }
 
   //recursively count(helper function for checkWin)
-  checkDirection(board,status,index,direction,currentP,count){
+  checkDirection(board,index,direction,currentP,count){
     var indexP = board.checkWhoes(index);
     if(indexP == currentP){
       var nextIndex = board.getIndexWDirection(index,direction);
-      return this.checkDirection(board,status,nextIndex,direction,indexP,count+1);
+      return this.checkDirection(board,nextIndex,direction,indexP,count+1);
     }else{
       return count;
     }
@@ -48,5 +53,14 @@ class Game{
   exit(){
     var hide = $("<div style='background-color:rgba(255,255,255,0.8);'></div>")
     $("body").prepend(hide.css("position","fixed").css("height","100%").css("width","100%"));
+  }
+
+  start(board){
+    this.board = board;
+    board.listenClick();
+    // if AI starts first
+    if(this.currentP == this.AIID){
+      console.log("ai");
+    }
   }
 }
