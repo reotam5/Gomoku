@@ -46,8 +46,12 @@ class Board{
       var y = parseInt(targetID.substring(division+1));
       var clickedIndex = x + (y * this.size);
 
+      var isWin = this.game.checkWin(this,this.getBoardStatus(),clickedIndex);
+      if(isWin){
+        this.game.exit();
+        console.log(currentP+" won");
+      }
 
-      this.game.checkWin(this,this.getBoardStatus(),clickedIndex);
       this.game.getNextPlayer();
     }else{
       console.log("not allowed");
@@ -214,6 +218,17 @@ class Board{
   //return index of cell next to current index to specified direction
   getIndexWDirection(index,direction){
     return this.map[index][direction] + index;
+  }
+
+  //returns whoes cell
+  checkWhoes(index){
+    var status = this.getBoardStatus();
+    if(Number.isNaN(index)){
+      return Number.MIN_SAFE_INTEGER;
+    }
+    var x = Math.trunc(index%this.size);
+    var y = Math.trunc(index/this.size);
+    return status[y][x];
   }
 
 }
