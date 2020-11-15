@@ -28,6 +28,5 @@ Scope of this project is...
       </li>
       <li>
           Actual AI training with tensorflow x MCTS
-
       </li>
 </ol>
