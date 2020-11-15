@@ -22,11 +22,12 @@ Scope of this project is...
       <li>To identify if a user won.</li>
       <li>To implement vs-Computer-mode (decision making with monte carlo tree search.) 
             <ol>
-                  <li>I think 4 x 4 board is max for Monte Carlo because it will take a lot of time to compute bigger board. </li>
-                  <li>Chanllenge 5 x 5 monte carlo tree search.</li>
+                  <li>I think 4 x 4 board is max for MCTS because it will take a lot of time to compute bigger board. </li>
+                  <li>Chanllenge 5 x 5.</li>
             </ol>
       </li>
       <li>
-          Actual AI training with tensorflow x Monte carlo
+          Actual AI training with tensorflow x MCTS
+
       </li>
 </ol>
