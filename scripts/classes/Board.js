@@ -25,7 +25,6 @@ class Board{
     var that = this;
     $(".cells").on('click',function(event){
       var targetElement = $(event.currentTarget);
-      
       that.input(targetElement);
     });
   }
@@ -33,7 +32,9 @@ class Board{
   input(targetElement){
     //don't allow users to enter on ai turn
     if(this.game.currentP == this.game.AIID){
-      return;
+      this.game.restart();
+    }else{
+      this.game.exit();
     }
     var unselectedCellType = "unselected";
     var currentP = this.game.currentP;
@@ -56,7 +57,7 @@ class Board{
         console.log(currentP+" won");
       }
 
-      this.game.getNextPlayer();
+      this.game.getNextPlayer(this);
     }else{
       console.log("not allowed");
     }
@@ -233,6 +234,32 @@ class Board{
     var x = Math.trunc(index%this.size);
     var y = Math.trunc(index/this.size);
     return status[y][x];
+  }
+
+  //helper function
+  //[0,1,2,3,4,5,6,7,8] into [[0,1,2],[3,4,5],[6,7,8]]
+  convertTMatrix(status){
+    var arr = [];
+    for(var y = 0; y < this.size; y++){
+      var x_arr = [];
+      for(var x = 0; x < this.size; x++){
+        x_arr.push(status[y * this.size + x]);
+      }
+      arr.push(x_arr);
+    }
+    return arr;
+  }
+
+  //helper function
+  //[[0,1,2],[3,4,5],[6,7,8]] into [0,1,2,3,4,5,6,7,8]
+  convertTArr(status){
+    var arr = [];
+    for(var y = 0; y < this.size; y++){
+      for(var x = 0; x < this.size; x++){
+        arr.push(status[y][x]);
+      }
+    }
+    return arr;
   }
 
 }
