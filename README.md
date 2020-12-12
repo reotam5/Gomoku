@@ -26,7 +26,6 @@ Scope of this project is...
                   <li>Chanllenge 5 x 5.</li>
             </ol>
       </li>
-      <li>
-          Actual AI training with tensorflow x MCTS
-      </li>
+      <li>Let computers play game with itself to make game record data</li>
+      <li>Use that record to train CNN model which takes current status as input and outputs the best move</li>
 </ol>
