@@ -2,7 +2,7 @@ function win_or_rnd(board,AIID){
   possible_index = possIndex(board.state);
   for(let i = 0; i < possible_index.length; i++){
     targetCell = possible_index[i];
-    temp = new Board(board.size);
+    temp = new Board(board.size,board.connect);
     temp.initiateState(board.state);
     temp.input(targetCell,AIID);
     if(temp.isEnd() == AIID && temp.end){
@@ -28,7 +28,7 @@ function possIndex(status){
 
 function trial(board,AIID,score,move){
   initialMove = move;
-  tempBoard = new Board(board.size);
+  tempBoard = new Board(board.size,board.connect);
   tempBoard.initiateState(board.state);
   currentID = AIID;
   tied = false;

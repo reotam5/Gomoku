@@ -1,14 +1,13 @@
-
-
-
-var size = 3;
+var size = 6;
+var connect = 3;
 var numPlayers = 2;
 var aiMode = true;
 var aiID = 1;
 var currentP = -1;
-board = new Board(size);
+board = new Board(size,connect);
 
 $(document).ready(function(){
+  $("#loading").hide();
   board.drawBoard($("#gameboard"),"images/gameAssets/unselected.png");
   listenClick();
 });
@@ -26,10 +25,15 @@ function listenClick(){
     input(clickedIndex);
 
     if(aiMode && currentP ==  aiID){
-      exit();
-      var aiMove = parseInt(act(board,aiID));
-      input(aiMove);
-      restart();
+      console.log("Started thinking");
+      $("#loading").show();
+      setTimeout(() => { 
+        var aiMove = parseInt(act(board,aiID)); 
+        console.log("Finished thinking");
+        $("#loading").hide();
+        input(aiMove);
+      }, 2000);
+      
     }else{
       return;
     }

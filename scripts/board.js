@@ -1,6 +1,7 @@
 class Board {
-  constructor(size) {
+  constructor(size,connect) {
     this.size = size;
+    this.connect = connect;
     this.end = false;
     this.map = this.createMap();
     this.state = [];
@@ -65,7 +66,7 @@ class Board {
         if (counter > max) {
           max = counter;
           leadID = targetID;
-          if (counter >= this.size) {
+          if (counter >= this.connect) {
             this.end = true;
             return leadID;
           }
