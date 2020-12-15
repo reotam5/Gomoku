@@ -29,9 +29,7 @@ function trial(AIID,score,status,move){
   copy[move] = AIID;
   var currentID = AIID;
   var tied = false;
-  var counter = 1;
   while(checkWin(copy,move) == -1){
-    counter++;
     if(!copy.includes(null)){
       tied = true;
       break;
@@ -43,7 +41,7 @@ function trial(AIID,score,status,move){
   if(tied){
     score[move] += 0;
   }else if(currentID == AIID){
-    score[move] += 1/counter;
+    score[move] += 1;
   }else{
     score -= 1;
   }
@@ -51,7 +49,7 @@ function trial(AIID,score,status,move){
 
 function act(AIID,status){
   var moves = possIndex(status);
-  var iteration = 50;
+  var iteration = 500;
 
   scores = {};
   for(var i = 0; i < moves.length; i++){
@@ -60,8 +58,9 @@ function act(AIID,status){
     for(var n = 0; n < iteration; n++){
       trial(AIID,scores,status,moves[i]);
     }
+    scores[moves[i]] /= iteration;
   }
-
+  console.log(scores);
   var max = Number.MIN_SAFE_INTEGER;
   var index = -1;
   for(key in scores){
