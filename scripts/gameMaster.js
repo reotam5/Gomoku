@@ -1,8 +1,8 @@
-var size = 6;
+var size = 3;
 var connect = 3;
 var numPlayers = 2;
 var aiMode = true;
-var aiID = 1;
+var aiID = -1;
 var currentP = -1;
 board = new Board(size,connect);
 
@@ -13,6 +13,18 @@ $(document).ready(function(){
 });
 
 function listenClick(){
+
+  if(aiMode && currentP ==  aiID){
+    console.log("Started thinking");
+    $("#loading").show();
+    setTimeout(() => { 
+      var aiMove = parseInt(act(board,aiID)); 
+      console.log("Finished thinking");
+      $("#loading").hide();
+      input(aiMove);
+    }, 2000);
+    
+  }
 
   $(".cells").on('click',function(event){
     var targetElement = $(event.currentTarget);

@@ -2,7 +2,7 @@ from board import Board
 from ai import possIndex
 from player import Player
 
-size = 6
+size = 3
 connect = 3
 board = Board(size,connect)
 board.drawBoard()
