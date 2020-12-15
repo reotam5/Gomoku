@@ -44,12 +44,12 @@ def trial(board,AIID,score,move):
     move = win_or_rnd(tempBoard,currentID)
   if(score[initialMove] == None):
     score[initialMove] = 0
-  if(tied):
+  if(tied and (not tempBoard.end)):
     score[initialMove] += 0
   elif(winner == AIID):
-    score[initialMove] += 1
+    score[initialMove] += 1/counter
   else:
-    score[initialMove] -= 1
+    score[initialMove] -= 1/counter
 
 
 def act(board,AIID):

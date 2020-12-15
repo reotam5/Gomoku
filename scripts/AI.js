@@ -1,73 +1,88 @@
-function win_or_rnd(status,AIID){
-  var possible_index = possIndex(status);
-  for(var i = 0; i < possible_index.length; i++){
-    var targetCell = possible_index[i];
-    var copy = Array.from(status);
-    copy[targetCell] = AIID;
-    var newStatus = copy;
-    if(checkWin(newStatus,targetCell) > -1){
+function win_or_rnd(board,AIID){
+  possible_index = possIndex(board.state);
+  for(let i = 0; i < possible_index.length; i++){
+    targetCell = possible_index[i];
+    temp = new Board(board.size);
+    temp.initiateState(board.state);
+    temp.input(targetCell,AIID);
+    if(temp.isEnd() == AIID && temp.end){
       return targetCell;
     }
   }
-  var rnd_int =  Math.floor(Math.random() * possible_index.length);
+  rnd_int = Math.floor(Math.random() * possible_index.length);
   return possible_index[rnd_int];
 }
 
-//allowed input. status is array format. [0,1,2,3,4,5,...]
+
+
 function possIndex(status){
-  var indexes = [];
-  for(var i = 0; i < status.length; i++){
-    if(status[i] == null){
+  indexes = [];
+  for(let i = 0; i < status.length; i++){
+    if(status[i] == 0){
       indexes.push(i);
     }
   }
   return indexes;
 }
 
-function trial(AIID,score,status,move){
-  var copy = Array.from(status);
-  copy[move] = AIID;
-  var currentID = AIID;
-  var tied = false;
-  while(checkWin(copy,move) == -1){
-    if(!copy.includes(null)){
+
+function trial(board,AIID,score,move){
+  initialMove = move;
+  tempBoard = new Board(board.size);
+  tempBoard.initiateState(board.state);
+  currentID = AIID;
+  tied = false;
+  winner = 0;
+  let counter = 0;
+  while(!tempBoard.end){
+    counter += 1;
+    tempBoard.input(move,currentID);
+    winner = tempBoard.isEnd();
+    if(possIndex(tempBoard.state).length == 0){
       tied = true;
       break;
     }
-    currentID = getNextPlayer(currentID);
-    copy[win_or_rnd(copy,currentID)] = currentID;
+    currentID = currentID * -1;
+    move = win_or_rnd(tempBoard,currentID);
   }
 
-  if(tied){
-    score[move] += 0;
-  }else if(currentID == AIID){
-    score[move] += 1;
-  }else{
-    score -= 1;
+  if(Number.isNaN(score[initialMove])){
+    score[initialMove] = 0;
+  }
+  if(tied && (!tempBoard.end)){
+    score[initialMove] += 0;
+  }else if(winner == AIID){
+    score[initialMove] += 1/counter;
+  }else {
+    score[initialMove] -= 1/counter;
   }
 }
 
-function act(AIID,status){
-  var moves = possIndex(status);
-  var iteration = 500;
 
-  scores = {};
-  for(var i = 0; i < moves.length; i++){
-    scores[moves[i]] = 0;
+function act(board,AIID){
+  moves = possIndex(board.state);
+  iteration = 100;
 
-    for(var n = 0; n < iteration; n++){
-      trial(AIID,scores,status,moves[i]);
+  scores = [];
+  for (let i = 0; i < board.state.length; i++){
+    scores.push(NaN);
+  }
+  for(let i = 0; i < moves.length; i++){
+    for(let n = 0; n < iteration; n++){
+      trial(board,AIID,scores,moves[i]);
     }
     scores[moves[i]] /= iteration;
   }
+
   console.log(scores);
-  var max = Number.MIN_SAFE_INTEGER;
-  var index = -1;
-  for(key in scores){
-    if(scores[key] > max){
-      max = scores[key];
-      index = key;
+  max = -9999999;
+  index = -1;
+  for(let i = 0; i < scores.length; i++){
+    if(!(Number.isNaN(scores[i])) && scores[i] > max){
+      max = scores[i];
+      index = i;
     }
   }
+
   return index;
 }

@@ -85,7 +85,7 @@ class Board {
 
 
   getNextPos(pos, direction) {
-    let toReturn = (this.map[pos][direction] != NaN) ? (this.map[pos][direction] + pos) : -1;
+    let toReturn = (!Number.isNaN(this.map[pos][direction])) ? (this.map[pos][direction] + pos) : -1;
     return toReturn;
   }
 
