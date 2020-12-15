@@ -2,8 +2,9 @@ from board import Board
 from ai import possIndex
 from player import Player
 
-size = 3
-board = Board(size)
+size = 6
+connect = 3
+board = Board(size,connect)
 board.drawBoard()
 currentID = -1
 players = [Player(False),Player(True)]

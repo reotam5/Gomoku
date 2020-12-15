@@ -1,8 +1,9 @@
 import copy
 
 class Board:
-  def __init__(self, size):
+  def __init__(self, size,connect):
     self.size = size
+    self.connect = connect
     self.end = False
     self.map = self.createMap()
     self.state = []
@@ -70,7 +71,7 @@ class Board:
           max = counter
           leadID = targetID
 
-          if counter >= self.size:
+          if counter >= self.connect:
             self.end = True
             return leadID
     return leadID

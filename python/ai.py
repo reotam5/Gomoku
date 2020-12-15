@@ -5,7 +5,7 @@ def win_or_rnd(board,AIID):
   possible_index = possIndex(board.state)
   for i in range(len(possible_index)):
     targetCell = possible_index[i]
-    tempBoard = Board(board.size)
+    tempBoard = Board(board.size,board.connect)
     tempBoard.initiateState(board.state)
     tempBoard.input(targetCell,AIID)
     if(tempBoard.isEnd() == AIID and tempBoard.end):
@@ -26,7 +26,7 @@ def possIndex(status):
 
 def trial(board,AIID,score,move):
   initialMove = move
-  tempBoard = Board(board.size)
+  tempBoard = Board(board.size,board.connect)
   tempBoard.initiateState(board.state)
   currentID = AIID
   tied = False
@@ -55,7 +55,7 @@ def trial(board,AIID,score,move):
 def act(board,AIID):
   moves = possIndex(board.state)
   
-  iteration = 500
+  iteration = 10
 
   scores = []
   for i in range(len(board.state)):
