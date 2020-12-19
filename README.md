@@ -16,7 +16,6 @@ Scope of this project is...
       <li>To make the game generalize
             <ol>
                   <li>so that player can change the size of the board.</li>
-                  <li>so that # of players is flexible.</li>
             </ol>
       </li>
       <li>To identify if a user won.</li>
@@ -27,5 +26,4 @@ Scope of this project is...
             </ol>
       </li>
       <li>Let computers play game with itself to make game record data</li>
-      <li>Use that record to train CNN model which takes current status as input and outputs the best move</li>
 </ol>
