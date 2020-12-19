@@ -51,6 +51,8 @@ class Board:
   def isEnd(self):
     max = 0
     leadID = 0
+    
+
     for i in range(self.size*self.size):
 
       targetID = self.state[i]

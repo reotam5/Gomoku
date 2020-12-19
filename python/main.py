@@ -7,7 +7,7 @@ connect = 3
 board = Board(size,connect)
 board.drawBoard()
 currentID = -1
-players = [Player(False),Player(True)]
+players = [Player(True),Player(True)]
 
 while(not board.end):
 
@@ -17,10 +17,9 @@ while(not board.end):
   while(board.input(target,currentID) == None):
     target = player.getMove(board,currentID)
   print("")
-  board.drawBoard()
   winner = board.isEnd()
   currentID *= -1
-
+board.drawBoard()
 print("winner is " + str(winner))
 
 

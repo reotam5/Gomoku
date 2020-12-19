@@ -59,9 +59,8 @@ function trial(board,AIID,score,move){
 }
 
 
-function act(board,AIID){
+function act(board,AIID, iteration){
   moves = possIndex(board.state);
-  iteration = 100;
 
   scores = [];
   for (let i = 0; i < board.state.length; i++){

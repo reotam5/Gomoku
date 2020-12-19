@@ -55,7 +55,7 @@ def trial(board,AIID,score,move):
 def act(board,AIID):
   moves = possIndex(board.state)
   
-  iteration = 10
+  iteration = 30
 
   scores = []
   for i in range(len(board.state)):

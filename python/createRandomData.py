@@ -5,11 +5,11 @@ import os
 
 currentWFile = 1
 currentBFile = 1
-iteration = 100000
+iteration = 10000
 
 for i in range(iteration):
   print(str(i) + " / " + str(iteration))
-  board = Board(3)
+  board = Board(4,4)
   currentID = -1
   noRecord = False
   winner = 0

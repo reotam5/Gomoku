@@ -1,16 +1,30 @@
-var size = 3;
-var connect = 3;
-var numPlayers = 2;
-var aiMode = true;
-var aiID = -1;
-var currentP = -1;
-board = new Board(size,connect);
+let size = 3;
+let connect = 3;
+let numPlayers = 2;
+let aiMode = true;
+let aiID = 1;
+let currentP = -1;
+let iteration = 100;
 
 $(document).ready(function(){
   $("#loading").hide();
-  board.drawBoard($("#gameboard"),"images/gameAssets/unselected.png");
-  listenClick();
+  $('#setting').modal('toggle');
+
+  $("#playButton").on("click",function(){
+    setUp();
+    $('#setting').modal('hide');
+    
+    board = new Board(size,connect);
+    board.drawBoard($("#gameboard"),"images/gameAssets/unselected.png");
+    listenClick();
+  });
 });
+
+function setUp(){
+  size = parseInt(document.getElementById("boardSize").value);
+  connect = parseInt(document.getElementById("winCond").value);
+  iteration = parseInt(document.getElementById("iteration").value);
+}
 
 function listenClick(){
 
@@ -18,7 +32,7 @@ function listenClick(){
     console.log("Started thinking");
     $("#loading").show();
     setTimeout(() => { 
-      var aiMove = parseInt(act(board,aiID)); 
+      var aiMove = parseInt(act(board,aiID,iteration)); 
       console.log("Finished thinking");
       $("#loading").hide();
       input(aiMove);
@@ -40,7 +54,7 @@ function listenClick(){
       console.log("Started thinking");
       $("#loading").show();
       setTimeout(() => { 
-        var aiMove = parseInt(act(board,aiID)); 
+        var aiMove = parseInt(act(board,aiID,iteration)); 
         console.log("Finished thinking");
         $("#loading").hide();
         input(aiMove);
