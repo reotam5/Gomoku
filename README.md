@@ -7,7 +7,7 @@ I use the following technologies for this prokect;
 <li>CSS</li>
 <li>JavaScript</li>
 <li>jQuery</li>
-<li>tensorflow.js</li>
+<li>Python</li>
 </ul>
 
 Scope of this project is...
