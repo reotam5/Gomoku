@@ -3,6 +3,7 @@ class Board {
     this.size = size;
     this.connect = connect;
     this.end = false;
+    this.tied = false;
     this.map = this.createMap();
     this.state = [];
     for (let i = 0; i < (size * size); i++) {
@@ -33,6 +34,7 @@ class Board {
   }
 
   drawBoard() {
+    $("#gameboard").empty();
     var rowElement;
     //goes through y axis
     for (var y = 0; y < size; y++) {
@@ -72,6 +74,10 @@ class Board {
           }
         }
       }
+    }
+    if(possIndex(this.state).length == 0){
+      this.tied = true;
+      return 0;
     }
     return leadID;
   }
@@ -150,6 +156,16 @@ class Board {
       }
     }
     return mapping;
+  }
+
+  possIndex(status){
+    indexes = [];
+    for(let i = 0; i < status.length; i++){
+      if(status[i] == 0){
+        indexes.push(i);
+      }
+    }
+    return indexes;
   }
 
 }

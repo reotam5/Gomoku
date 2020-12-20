@@ -27,3 +27,31 @@
   justify-content: center;
   align-items: center;
 }
+#endScreen{
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#endContent{
+  width: 80%;
+  height: 40%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: black 2px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+#endButtons{
+  width: 100%;
+  text-align: center;
+}
+#endMessage{
+  font-size: 25pt;
+  text-align: center;
+}

@@ -31,17 +31,12 @@ function trial(board,AIID,score,move){
   tempBoard = new Board(board.size,board.connect);
   tempBoard.initiateState(board.state);
   currentID = AIID;
-  tied = false;
   winner = 0;
-  let counter = 0;
-  while(!tempBoard.end){
+  let counter = 1;
+  while(!tempBoard.end && !tempBoard.tied){
     counter += 1;
     tempBoard.input(move,currentID);
     winner = tempBoard.isEnd();
-    if(possIndex(tempBoard.state).length == 0){
-      tied = true;
-      break;
-    }
     currentID = currentID * -1;
     move = win_or_rnd(tempBoard,currentID);
   }
@@ -49,11 +44,11 @@ function trial(board,AIID,score,move){
   if(Number.isNaN(score[initialMove])){
     score[initialMove] = 0;
   }
-  if(tied && (!tempBoard.end)){
+  if(tempBoard.tied){
     score[initialMove] += 0;
-  }else if(winner == AIID){
+  }else if(tempBoard.end && winner == AIID){
     score[initialMove] += 1/counter;
-  }else {
+  }else if(tempBoard.end && winner != AIID){
     score[initialMove] -= 1/counter;
   }
 }
@@ -72,8 +67,6 @@ function act(board,AIID, iteration){
     }
     scores[moves[i]] /= iteration;
   }
-
-  console.log(scores);
   max = -9999999;
   index = -1;
   for(let i = 0; i < scores.length; i++){

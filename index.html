@@ -73,31 +73,31 @@
             <div class="input-group-prepend">
               <span class="input-group-text"># of self-play iteration</span>
             </div>
-            <input type="number" id="iteration" class="form-control" min="1" max="500" value="100">
+            <input type="number" id="iteration" class="form-control" min="1" max="500" value="300">
           </div>
 
           Player 1:
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="player1AI">
-            <label class="custom-control-label" for="player1AI">CP</label>
+            <label class="custom-control-label" for="player1AI">AI?</label>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="player1Name">Name</span>
+              <span class="input-group-text">Name</span>
             </div>
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="player1Name" value="Player 1">
+            <input type="text" class="form-control" aria-label="Default" id="player1Name" value="Player 1">
           </div>
 
           Player 2:
           <div class="custom-control custom-switch">
             <input type="checkbox" class="custom-control-input" id="player2AI">
-            <label class="custom-control-label" for="player2AI">CP</label>
+            <label class="custom-control-label" for="player2AI">AI?</label>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="player2Name">Name</span>
+              <span class="input-group-text">Name</span>
             </div>
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="player2Name" value="Player 2">
+            <input type="text" class="form-control" aria-label="Default" id="player2Name" value="Player 2">
           </div>
 
         </div>
@@ -116,6 +116,16 @@
     </button>
   </div>
 
+  <div id="endScreen">
+    <div id="endContent">
+      <div id="endMessage">Player 1 Won!!</div>
+      <div id="endButtons">
+        <button type="button" class="btn btn-secondary" onclick="changeSetting()">Change settings</button>
+        <button type="button" class="btn btn-primary " onclick="startGame()">Play again</button>
+      </div>
+    </div>
+  </div>
+
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
     crossorigin="anonymous"></script>
@@ -124,6 +134,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
   <script src="scripts/board.js"></script>
   <script src="scripts/AI.js"></script>
+  <script src="scripts/Player.js"></script>
   <script src="scripts/gameMaster.js"></script>
 
 </body>
